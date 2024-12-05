@@ -55,7 +55,7 @@ const app = Vue.createApp({
     },
 
     // 處理觸控事件
-    playSoundOnTouchStart(keyData) {
+    playSoundOnTouch(keyData) {
       // 防止重複觸發
       if (this.activeKeys.has(keyData.dataKey)) {
         return;
@@ -73,17 +73,6 @@ const app = Vue.createApp({
         keyElement.classList.remove("active");
       }
     },
-
-    // // 處理觸控結束事件
-    // touchEnd(keyData) {
-    //   const keyElement = document.querySelector(
-    //     `.key[data-key="${keyData.dataKey}"]`
-    //   );
-    //   if (keyElement) {
-    //     keyElement.classList.remove("active");
-    //     this.activeKeys.delete(keyData.dataKey);
-    //   }
-    // },
   },
   mounted() {
     // 綁定鍵盤事件
