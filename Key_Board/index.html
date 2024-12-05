@@ -16,9 +16,9 @@
         :class="whiteClass"
         :data-key="whiteKey.dataKey"
         :key="whiteKey.dataKey"
-        @click="playSoundOnTouch(whiteKey)"
-        @touchstart="playSoundOnTouch(whiteKey)"
-        @touchend="playSoundOnTouch(whiteKey)"
+        @click="playSoundOnTouchStart(whiteKey)"
+        @touchstart="playSoundOnTouchStart(whiteKey)"
+        @touchend="touchEnd(whiteKey)"
       >
         {{whiteKey.keyboard.toUpperCase()}}
       </div>

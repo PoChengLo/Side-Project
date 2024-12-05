@@ -21,6 +21,7 @@ const app = Vue.createApp({
         return;
       }
 
+      // 將按鍵加入 activeKeys 集合中
       this.activeKeys.add(keyData.dataKey);
 
       const keyElement = document.querySelector(
@@ -30,11 +31,12 @@ const app = Vue.createApp({
       if (keyElement) {
         keyElement.classList.add("active");
 
+        // 播放音效
         const audio = new Audio(`sounds/${keyData.sound}.wav`);
         audio.play();
       }
 
-      // 在音效播放結束後移除樣式
+      // 在音效播放結束後移除樣式並從 activeKeys 中移除
       setTimeout(() => {
         if (keyElement) {
           keyElement.classList.remove("active");
@@ -42,6 +44,7 @@ const app = Vue.createApp({
         this.activeKeys.delete(keyData.dataKey);
       }, 200);
     },
+
     // 處理鍵盤按下事件
     playSoundOnKeydown(e) {
       // 找到對應的 whiteKey 物件
@@ -50,10 +53,17 @@ const app = Vue.createApp({
         this.playSound(keyData);
       }
     },
+
     // 處理觸控事件
-    playSoundOnTouch(keyData) {
+    playSoundOnTouchStart(keyData) {
+      // 防止重複觸發
+      if (this.activeKeys.has(keyData.dataKey)) {
+        return;
+      }
+
       this.playSound(keyData);
     },
+
     releaseKey(e) {
       this.activeKeys.delete(e.keyCode);
       const keyElement = document.querySelector(
@@ -61,6 +71,17 @@ const app = Vue.createApp({
       );
       if (keyElement) {
         keyElement.classList.remove("active");
+      }
+    },
+
+    // 處理觸控結束事件
+    touchEnd(keyData) {
+      const keyElement = document.querySelector(
+        `.key[data-key="${keyData.dataKey}"]`
+      );
+      if (keyElement) {
+        keyElement.classList.remove("active");
+        this.activeKeys.delete(keyData.dataKey);
       }
     },
   },
