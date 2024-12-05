@@ -74,16 +74,16 @@ const app = Vue.createApp({
       }
     },
 
-    // 處理觸控結束事件
-    touchEnd(keyData) {
-      const keyElement = document.querySelector(
-        `.key[data-key="${keyData.dataKey}"]`
-      );
-      if (keyElement) {
-        keyElement.classList.remove("active");
-        this.activeKeys.delete(keyData.dataKey);
-      }
-    },
+    // // 處理觸控結束事件
+    // touchEnd(keyData) {
+    //   const keyElement = document.querySelector(
+    //     `.key[data-key="${keyData.dataKey}"]`
+    //   );
+    //   if (keyElement) {
+    //     keyElement.classList.remove("active");
+    //     this.activeKeys.delete(keyData.dataKey);
+    //   }
+    // },
   },
   mounted() {
     // 綁定鍵盤事件
